@@ -67,8 +67,11 @@ public class ContextRule implements TestRule {
             public void evaluate() throws Throwable {
                 List<String> contextNames = getContextNames(description);
                 executeBeforeContexts(contextNames);
-                base.evaluate();
-                executeAfterContexts(contextNames);
+                try {
+                    base.evaluate();
+                } finally {
+                    executeAfterContexts(contextNames);
+                }
             }
         };
     }
