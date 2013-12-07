@@ -12,8 +12,8 @@ This often manifests in one of two ways:
   ```java
   @Before
   public void setUp(){
-    setupA();
-    setupB();
+    setUpA();
+    setUpB();
   }
   
   @Test
@@ -36,31 +36,37 @@ This often manifests in one of two ways:
     // do test that requires B
   }
   ```
+  
+  Which means B is being set up for tests that require A, and A is being set up for tests that require B.  This is often deemed *ok*, but falls down when the different tests require conficting set up.  When this is the case, your only real remaining option is:
 
-2. Repeated steps within the tests that add noise to the detail of the test case:
+2. Repeated steps within the tests themselves:
   
   ```java
   @Test
   public void shouldDoSomethingWhenA(){
-    setupA();
+    setUpA();
     // do test that requires A
   }
   
   @Test
   public void shouldDoSomethingElseWhenA(){
-    setupA();
+    setUpA();
     // do test that requires A
   }
   
   @Test
   public void shouldDoSomethingWhenB(){
-    setupB();
+    setUpB();
     // do test that requires B
   }
 
   @Test
   public void shouldDoSomethingElseWhenB(){
-    setupB();
+    setUpB();
     // do test that requires B
   }
   ```
+  
+  Also often deemed *ok*, but can end up with a lot of repetition between tests within the test method itself.  Ideally the test method would contain only the detail of this specific test case, anything else is really just noise to be sifted through to get to the meat of the test.
+  
+
