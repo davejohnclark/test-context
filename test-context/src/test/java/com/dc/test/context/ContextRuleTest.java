@@ -13,40 +13,40 @@ public class ContextRuleTest {
     @Rule
     public ContextRule context = new ContextRule(this);
 
-    Object a;
-    Object b;
+    Object foo;
+    Object bar;
 
-    @BeforeContext("a is not null")
-    public void aIsNotNullSetUp() {
-        a = new Object();
+    @BeforeContext("foo is not null")
+    public void fooIsNotNullSetUp() {
+        foo = new Object();
     }
 
-    @BeforeContext("b is not null")
-    public void bIsNotNullSetUp() {
-        b = new Object();
-    }
-
-    @Test
-    @Context(when = "a is not null")
-    public void shouldOnlyExecuteAIsNotNullBeforeTheTest() {
-
-        assertNotNull(a);
-        assertNull(b);
+    @BeforeContext("bar is not null")
+    public void barIsNotNullSetUp() {
+        bar = new Object();
     }
 
     @Test
-    @Context(when = "b is not null")
-    public void shouldOnlyExecuteBIsNotNullBeforeTheTest() {
+    @Context(when = "foo is not null")
+    public void shouldOnlyExecuteFooIsNotNullBeforeTheTest() {
 
-        assertNotNull(b);
-        assertNull(a);
+        assertNotNull(foo);
+        assertNull(bar);
     }
 
     @Test
-    @Context(whenEachOf = { "a is not null", "b is not null" })
-    public void shouldExecuteTheBeforeContextsForBothAAndB() {
+    @Context(when = "bar is not null")
+    public void shouldOnlyExecuteBarIsNotNullBeforeTheTest() {
 
-        assertNotNull(a);
-        assertNotNull(b);
+        assertNotNull(bar);
+        assertNull(foo);
+    }
+
+    @Test
+    @Context(whenEachOf = { "foo is not null", "bar is not null" })
+    public void shouldExecuteTheBeforeContextsForBothFooAndBar() {
+
+        assertNotNull(foo);
+        assertNotNull(bar);
     }
 }
