@@ -1,6 +1,6 @@
 test-context
 ============
-https://travis-ci.org/[davejohnclark]/[test-context].png
+https://travis-ci.org/davejohnclark/test-context.png
 
 A simple way of adding context to java unit tests to allow different set up and tear down steps to run - currently aimed at junit tests.  Inspired by RSpec.
 
