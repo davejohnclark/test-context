@@ -1,6 +1,7 @@
 package com.dc.test.context.junit;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -78,6 +79,9 @@ public class ContextRule implements TestRule {
 
     private List<String> getContextNames(Description description) {
         Context context = description.getAnnotation(Context.class);
+        if (context == null) {
+            return emptyList();
+        }
         if (context.whenEachOf().length >= 1) {
             return asList(context.whenEachOf());
         }

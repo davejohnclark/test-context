@@ -49,4 +49,11 @@ public class ContextRuleTest {
         assertNotNull(foo);
         assertNotNull(bar);
     }
+
+    @Test
+    public void shouldNotRunAnyBeforeContextsWhenTheTestDeclaresNoContext() {
+
+        assertNull(foo);
+        assertNull(bar);
+    }
 }
